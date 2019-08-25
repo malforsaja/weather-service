@@ -8,7 +8,7 @@ let appId = process.env.DEFAULT_KEY;
 /** 
 @route    /cities?lat={latitude}&lng={longitude}
 @method   GET
-@desc     List the available cities around the specified latitude/longitude within a radius of 10 kilometers Example: http://localhost:3000/cities?lat=49.48&lng=8.46
+@desc     List the available cities around the specified latitude/longitude within a radius of 10 kilometers Example: http://localhost:8080/cities?lat=49.48&lng=8.46
 @access   Public
 */
 router.get('/', (req, res) => {
@@ -65,7 +65,7 @@ router.get('/', (req, res) => {
 /** 
 @route    /cities/{city_id}
 @method   GET
-@desc     Retrieve the details for a city (by city_id) Example: http://localhost:3000/cities/2873891
+@desc     Retrieve the details for a city (by city_id) Example: http://localhost:8080/cities/2873891
 @access   Public
 */
 router.get('/:id', (req, res) => {
