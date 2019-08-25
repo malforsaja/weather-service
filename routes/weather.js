@@ -5,13 +5,6 @@ const moment = require('moment');
 
 let appId = process.env.DEFAULT_KEY;
 
-router.get('/test', (req, res) => {
-  res.send({
-    message: 'Weather is fine!'
-  })
-})
-
-
 /** 
 @route    /cities?lat={latitude}&lng={longitude}
 @method   GET

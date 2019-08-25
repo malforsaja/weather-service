@@ -13,26 +13,20 @@ describe('Weather api routes', () => {
     expect(app).to.be.a('function');
   })
 
-  it('it should return 200 and a message', (done) => {
-    //send a GET request to /
-    chai.request(app).get('/cities/test').then(res => {
-      //validate response has a message
-      expect(res).to.have.status(200);
-      expect(res.body.message).to.be.equal('Weather is fine!')
-
-      done();
-    }).catch(err => {
-      console.log(err);
-    });
-  })
-
   it('it should list the available cities around the specified latitude/longitude', (done) => {
     chai.request(app).get('/cities')
       .query({ lat: 49.48, lng: 8.46 })
       .then(res => {
-        //console.log('res: ', res);
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('array');
+        expect(res.body[0].id).to.be.equal(2873891);
+        expect(res.body[0].name).to.be.equal("Mannheim");
+        let response = res.body;
+        response.forEach(city => {
+          //console.log('res: ', city);
+          expect(city.id).to.be.a('number');
+          expect(city.name).to.be.a('string');
+        });
         done();
       }).catch(err => {
         console.log(err.message);
@@ -45,6 +39,16 @@ describe('Weather api routes', () => {
       .then(res => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
+        expect(res.body).to.haveOwnProperty('id');
+        expect(res.body).to.haveOwnProperty('name');
+        expect(res.body).to.haveOwnProperty('lat');
+        expect(res.body).to.haveOwnProperty('lng');
+
+        // check if values are correct
+        expect(res.body.id).to.be.equal(519188);
+        expect(res.body.name).to.be.equal("Novinki");
+        expect(res.body.lat).to.be.equal(55.68);
+        expect(res.body.lng).to.be.equal(37.67);
         done();
       }).catch(err => {
         console.log(err.message);
@@ -59,18 +63,20 @@ describe('Weather api routes', () => {
       expect(res).to.have.status(200);
       expect(res.body).to.be.an('object')
 
+      expect(res.body).to.haveOwnProperty('sunrise');
+      expect(res.body).to.haveOwnProperty('sunset');
+      expect(res.body).to.haveOwnProperty('temp');
+      expect(res.body).to.haveOwnProperty('temp_min');
+      expect(res.body).to.haveOwnProperty('temp_max');
+      expect(res.body).to.haveOwnProperty('pressure');
+      expect(res.body).to.haveOwnProperty('humidity');
+      expect(res.body).to.haveOwnProperty('clouds_percent');
+      expect(res.body).to.haveOwnProperty('wind_speed');
       done();
     }).catch(err => {
       console.log(err);
     });
   })
-
-  it.skip('Returns 404 error for non defined routes', (done) => {
-    chai.request(app).get('/unexisting').then((res) => {
-      expect(res).to.have.status(404);
-      done();
-    });
-  });
 })
 
 
