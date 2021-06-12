@@ -22,7 +22,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "mocha": "^6.2.3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.1",
     "request": "^2.88.2"
   }
 }
